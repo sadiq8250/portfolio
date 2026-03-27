@@ -108,10 +108,10 @@ section{position:relative;z-index:1;}
 .projects-list{display:flex;flex-direction:column;border-top:1px solid var(--border);}
 .proj-card{border-bottom:1px solid var(--border);transition:opacity .4s;}
 .proj-card.hidden{display:none;}
-.proj-card-inner{display:grid;grid-template-columns:55fr 45fr;min-height:480px;}
+.proj-card-inner{display:grid;grid-template-columns:55fr 45fr;}
 .proj-card-inner--rev{direction:rtl;}
 .proj-card-inner--rev > *{direction:ltr;}
-.proj-visual{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:480px;transition:filter .5s;}
+.proj-visual{position:relative;overflow:hidden;aspect-ratio:16/10;transition:filter .5s;}
 .proj-card:hover .proj-visual{filter:brightness(1.1);}
 .proj-mock{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;padding:40px;width:100%;height:100%;}
 .proj-num{position:absolute;bottom:18px;right:22px;font-family:'Bebas Neue',sans-serif;font-size:54px;color:rgba(255,255,255,.05);line-height:1;pointer-events:none;z-index:1;letter-spacing:2px;}
@@ -138,7 +138,7 @@ section{position:relative;z-index:1;}
 .proj-duo-card{border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;transition:background .3s;cursor:none;}
 .proj-duo-card:last-child{border-right:none;}
 .proj-duo-card:hover{background:var(--bg2);}
-.proj-duo-visual{height:260px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.proj-duo-visual{aspect-ratio:16/9;height:auto;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
 .proj-duo-info{padding:28px 32px;flex:1;}
 .proj-duo-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:var(--text);margin-bottom:10px;}
 .proj-duo-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px;}
@@ -253,7 +253,7 @@ footer{background:var(--bg2);padding:36px 60px;border-top:1px solid var(--border
   .exp-timeline::before{left:0;}
   .exp-item::before{left:-5px;top:40px;}
   /* work */
-  .proj-card-inner,.proj-card-inner--rev{grid-template-columns:1fr;direction:ltr;}.proj-visual{min-height:260px!important;}
+  .proj-card-inner,.proj-card-inner--rev{grid-template-columns:1fr;direction:ltr;}.proj-visual{aspect-ratio:16/9!important;}
   .proj-visual{min-height:260px;}
   .proj-info{padding:28px 24px;}
   .proj-duo{grid-template-columns:1fr;}
@@ -278,6 +278,38 @@ footer{background:var(--bg2);padding:36px 60px;border-top:1px solid var(--border
   .proj-card:hover .proj-img { transform: scale(1.06); }
   .proj-duo-card:hover .proj-img { transform: scale(1.06); }
   .proj-img { transition: transform .7s cubic-bezier(.16,1,.3,1); }
+
+
+  /* ── Behance image link ── */
+  .proj-visual-link { cursor: none; display: block; }
+  .proj-visual-link:hover .proj-visual { filter: brightness(1.12); }
+  .proj-visual-link:hover .proj-img { transform: scale(1.04); }
+  /* Behance badge on hover */
+  .proj-visual { position: relative; }
+  .proj-visual-link::after {
+    content: "View on Behance ↗";
+    position: absolute;
+    top: 16px; right: 16px;
+    background: rgba(91,93,240,0.92);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .proj-visual-link:hover::after {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Duo card link */
+  .proj-duo-visual-link { cursor: none; display: block; }
 
 </style>
 </head>
@@ -374,17 +406,18 @@ footer{background:var(--bg2);padding:36px 60px;border-top:1px solid var(--border
     <!-- P1 FISDOM MARKETING -->
     <article class="proj-card reveal" data-cats="fintech campaign">
       <div class="proj-card-inner">
-        <div class="proj-visual" style="background:linear-gradient(135deg,#0d0d2b,#1a1060,#0a0020);overflow:hidden;position:relative;">
+        <a href="https://www.behance.net/gallery/245663979/Fisdom-add-creatives" target="_blank" rel="noopener" class="proj-visual-link" title="View on Behance" style="display:block;text-decoration:none;"><div class="proj-visual" style="background:linear-gradient(135deg,#0d0d2b,#1a1060,#0a0020);overflow:hidden;position:relative;">
           <img
             src="https://ik.imagekit.io/sadiqpashao/sadiq%20folio%20preview%20files/productgrowth.jpg"
             alt="Fisdom Growth & Performance Marketing Creatives"
-            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);padding:0;"
             class="proj-img"
             loading="lazy"
           >
-          <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          
           <div class="proj-num" style="z-index:2;">01</div>
           </div>
+        </a>
         <div class="proj-info">
           <div class="proj-meta">
             <div class="proj-tags-row"><span class="ptag">Fintech</span><span class="ptag">Performance Marketing</span><span class="ptag">Visual Design</span></div>
@@ -410,17 +443,18 @@ footer{background:var(--bg2);padding:36px 60px;border-top:1px solid var(--border
     <!-- P2 TAX2WIN -->
     <article class="proj-card reveal reveal-d1" data-cats="fintech campaign">
       <div class="proj-card-inner proj-card-inner--rev">
-        <div class="proj-visual" style="background:linear-gradient(135deg,#001a0d,#003d1a,#001a0d);overflow:hidden;position:relative;">
+        <a href="https://www.behance.net/gallery/245662355/Tax2win-add-Creatives" target="_blank" rel="noopener" class="proj-visual-link" title="View on Behance" style="display:block;text-decoration:none;"><div class="proj-visual" style="background:linear-gradient(135deg,#001a0d,#003d1a,#001a0d);overflow:hidden;position:relative;">
           <img
             src="https://ik.imagekit.io/sadiqpashao/sadiq%20folio%20preview%20files/TW-GA-02-1200X628.jpg"
             alt="Tax2Win Campaign & Acquisition Creatives"
-            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);padding:0;"
             class="proj-img"
             loading="lazy"
           >
-          <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          
           <div class="proj-num" style="z-index:2;">02</div>
           </div>
+        </a>
         <div class="proj-info">
           <div class="proj-meta">
             <div class="proj-tags-row"><span class="ptag">Fintech</span><span class="ptag">Campaign Design</span><span class="ptag">Performance</span></div>
@@ -446,17 +480,18 @@ footer{background:var(--bg2);padding:36px 60px;border-top:1px solid var(--border
     <!-- P3 BANKING PARTNERS -->
     <article class="proj-card reveal" data-cats="campaign fintech">
       <div class="proj-card-inner">
-        <div class="proj-visual" style="background:linear-gradient(135deg,#1a0800,#3d1500,#1a0800);overflow:hidden;position:relative;">
+        <a href="https://www.behance.net/gallery/246398117/Bank-Creatives" target="_blank" rel="noopener" class="proj-visual-link" title="View on Behance" style="display:block;text-decoration:none;"><div class="proj-visual" style="background:linear-gradient(135deg,#1a0800,#3d1500,#1a0800);overflow:hidden;position:relative;">
           <img
             src="https://ik.imagekit.io/sadiqpashao/sadiq%20folio%20preview%20files/bank-1.jpg"
             alt="Bank Partner Marketing Creatives"
-            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);padding:0;"
             class="proj-img"
             loading="lazy"
           >
-          <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          
           <div class="proj-num" style="z-index:2;">03</div>
           </div>
+        </a>
         <div class="proj-info">
           <div class="proj-meta">
             <div class="proj-tags-row"><span class="ptag">Banking</span><span class="ptag">Brand Design</span><span class="ptag">Campaigns</span></div>
@@ -482,17 +517,18 @@ footer{background:var(--bg2);padding:36px 60px;border-top:1px solid var(--border
     <!-- P4 LANDING PAGES -->
     <article class="proj-card reveal reveal-d1" data-cats="ui fintech">
       <div class="proj-card-inner proj-card-inner--rev">
-        <div class="proj-visual" style="background:linear-gradient(135deg,#050520,#0d0d3d,#050520);overflow:hidden;position:relative;">
+        <a href="https://www.behance.net/gallery/246464165/UI-UX-Design" target="_blank" rel="noopener" class="proj-visual-link" title="View on Behance" style="display:block;text-decoration:none;"><div class="proj-visual" style="background:linear-gradient(135deg,#050520,#0d0d3d,#050520);overflow:hidden;position:relative;">
           <img
             src="https://ik.imagekit.io/sadiqpashao/sadiq%20folio%20preview%20files/SADIQ_WEALTH-MANAGEMENT.jpg"
             alt="Fintech Product Landing Pages"
-            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);padding:0;"
             class="proj-img"
             loading="lazy"
           >
-          <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          
           <div class="proj-num" style="z-index:2;">04</div>
           </div>
+        </a>
         <div class="proj-info">
           <div class="proj-meta">
             <div class="proj-tags-row"><span class="ptag">UI/UX</span><span class="ptag">Product Design</span><span class="ptag">Web</span></div>
@@ -521,17 +557,18 @@ footer{background:var(--bg2);padding:36px 60px;border-top:1px solid var(--border
     <!-- P5 MOTION -->
     <article class="proj-card reveal" data-cats="motion campaign">
       <div class="proj-card-inner">
-        <div class="proj-visual" style="background:linear-gradient(135deg,#0a001a,#1a0035,#0a001a);overflow:hidden;position:relative;">
+        <a href="https://www.behance.net/gallery/217454103/Add-creatives-GIFs-Emailers" target="_blank" rel="noopener" class="proj-visual-link" title="View on Behance" style="display:block;text-decoration:none;"><div class="proj-visual" style="background:linear-gradient(135deg,#0a001a,#1a0035,#0a001a);overflow:hidden;position:relative;">
           <img
             src="https://ik.imagekit.io/sadiqpashao/sadiq%20folio%20preview%20files/b05091217454103.6790f3a29edd6.gif"
             alt="Motion Graphics & Interactive Creatives"
-            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);padding:0;"
             class="proj-img"
             loading="lazy"
           >
-          <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          
           <div class="proj-num" style="z-index:2;">05</div>
           </div>
+        </a>
         <div class="proj-info">
           <div class="proj-meta">
             <div class="proj-tags-row"><span class="ptag">Motion Design</span><span class="ptag">Marketing</span><span class="ptag">Engagement</span></div>
@@ -557,17 +594,18 @@ footer{background:var(--bg2);padding:36px 60px;border-top:1px solid var(--border
     <!-- P6 IPO -->
     <article class="proj-card reveal reveal-d1" data-cats="fintech campaign">
       <div class="proj-card-inner proj-card-inner--rev">
-        <div class="proj-visual" style="background:linear-gradient(135deg,#001020,#002040,#001020);overflow:hidden;position:relative;">
+        <a href="https://www.behance.net/gallery/217453725/IPO-Creatives" target="_blank" rel="noopener" class="proj-visual-link" title="View on Behance" style="display:block;text-decoration:none;"><div class="proj-visual" style="background:linear-gradient(135deg,#001020,#002040,#001020);overflow:hidden;position:relative;">
           <img
             src="https://ik.imagekit.io/sadiqpashao/sadiq%20folio%20preview%20files/Swiggy-In-App-Banner.jpg"
             alt="IPO Launch Campaign Creatives"
-            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);padding:0;"
             class="proj-img"
             loading="lazy"
           >
-          <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          
           <div class="proj-num" style="z-index:2;">06</div>
           </div>
+        </a>
         <div class="proj-info">
           <div class="proj-meta">
             <div class="proj-tags-row"><span class="ptag">Fintech</span><span class="ptag">Campaign Design</span></div>
@@ -593,17 +631,18 @@ footer{background:var(--bg2);padding:36px 60px;border-top:1px solid var(--border
     <!-- P7 EXPLAINER VIDEOS -->
     <article class="proj-card reveal" data-cats="motion">
       <div class="proj-card-inner">
-        <div class="proj-visual" style="background:linear-gradient(135deg,#1a0a00,#2d1500,#1a0a00);overflow:hidden;position:relative;">
+        <a href="https://www.behance.net/gallery/118006225/EXPLAINER-VIDEO" target="_blank" rel="noopener" class="proj-visual-link" title="View on Behance" style="display:block;text-decoration:none;"><div class="proj-visual" style="background:linear-gradient(135deg,#1a0a00,#2d1500,#1a0a00);overflow:hidden;position:relative;">
           <img
             src="https://ik.imagekit.io/sadiqpashao/sadiq%20folio%20preview%20files/swarup_Twitter%20post%20copy%2010.jpg"
             alt="Product Explainer Videos"
-            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);padding:0;"
             class="proj-img"
             loading="lazy"
           >
-          <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          
           <div class="proj-num" style="z-index:2;">07</div>
           </div>
+        </a>
         <div class="proj-info">
           <div class="proj-meta">
             <div class="proj-tags-row"><span class="ptag">Motion</span><span class="ptag">Product Storytelling</span></div>
@@ -629,17 +668,18 @@ footer{background:var(--bg2);padding:36px 60px;border-top:1px solid var(--border
     <!-- P8 + P9 DUO -->
     <div class="proj-duo reveal">
       <article class="proj-duo-card" data-cats="motion ui">
-        <div class="proj-duo-visual" style="background:linear-gradient(135deg,#1a0028,#2e0050,#1a0028);overflow:hidden;position:relative;">
+        <a href="https://www.behance.net/gallery/115144847/Logo-and-Branding" target="_blank" rel="noopener" class="proj-visual-link" title="View on Behance" style="display:block;text-decoration:none;"><div class="proj-duo-visual" style="background:linear-gradient(135deg,#1a0028,#2e0050,#1a0028);overflow:hidden;position:relative;">
           <img
             src="https://ik.imagekit.io/sadiqpashao/sadiq%20folio%20preview%20files/branding-3.jpg"
             alt="Branding & Logo Design"
-            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);padding:0;"
             class="proj-img"
             loading="lazy"
           >
-          <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          
           <div class="proj-num" style="z-index:2;">08</div>
           </div>
+        </a>
         <div class="proj-duo-info">
           <div class="proj-tags-row" style="margin-bottom:9px;"><span class="ptag">Branding</span><span class="ptag">Logo Design</span><span class="ptag">Identity</span></div>
           <h3 class="proj-duo-title">Branding &amp; Logo Design</h3>
@@ -648,17 +688,18 @@ footer{background:var(--bg2);padding:36px 60px;border-top:1px solid var(--border
         </div>
       </article>
       <article class="proj-duo-card" data-cats="ui">
-        <div class="proj-duo-visual" style="background:linear-gradient(135deg,#001a10,#003d20,#001a10);overflow:hidden;position:relative;">
+        <a href="https://www.behance.net/gallery/91579663/Ice-Home" target="_blank" rel="noopener" class="proj-visual-link" title="View on Behance" style="display:block;text-decoration:none;"><div class="proj-duo-visual" style="background:linear-gradient(135deg,#001a10,#003d20,#001a10);overflow:hidden;position:relative;">
           <img
             src="https://ik.imagekit.io/sadiqpashao/sadiq%20folio%20preview%20files/illustration.jpg"
             alt="Illustration Work"
-            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);padding:0;"
             class="proj-img"
             loading="lazy"
           >
-          <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          
           <div class="proj-num" style="z-index:2;">09</div>
           </div>
+        </a>
         <div class="proj-duo-info">
           <div class="proj-tags-row" style="margin-bottom:9px;"><span class="ptag">Illustration</span><span class="ptag">Visual Design</span></div>
           <h3 class="proj-duo-title">Illustration Work</h3>
@@ -671,17 +712,18 @@ footer{background:var(--bg2);padding:36px 60px;border-top:1px solid var(--border
     <!-- P10 — SOCIAL MEDIA, PACKAGE DESIGN & PRINT MEDIA -->
     <article class="proj-card reveal" data-cats="campaign ui">
       <div class="proj-card-inner">
-        <div class="proj-visual" style="background:linear-gradient(135deg,#0d1a0a,#173010,#0a1508);overflow:hidden;position:relative;">
+        <a href="https://www.behance.net/gallery/246461499/Social-Media-Package-Design-Print-Media" target="_blank" rel="noopener" class="proj-visual-link" title="View on Behance" style="display:block;text-decoration:none;"><div class="proj-visual" style="background:linear-gradient(135deg,#0d1a0a,#173010,#0a1508);overflow:hidden;position:relative;">
           <img
             src="https://ik.imagekit.io/sadiqpashao/sadiq%20folio%20preview%20files/social-media-2.jpg"
             alt="Social Media, Package Design & Print Media"
-            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);padding:0;"
             class="proj-img"
             loading="lazy"
           >
-          <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          
           <div class="proj-num" style="z-index:2;">10</div>
           </div>
+        </a>
         <div class="proj-info">
           <div class="proj-meta">
             <div class="proj-tags-row">
